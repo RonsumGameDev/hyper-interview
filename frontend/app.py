@@ -19,7 +19,6 @@ def register():
             "contact": contact,
             "member_names": member_names
         }
-
         try:
             res = requests.post(f"{API_URL}/register", json=payload)
             res.raise_for_status()
