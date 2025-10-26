@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+
+# Databases
+*.db
+*.sqlite3
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+
+# NGINX temp files
+nginx/logs/
