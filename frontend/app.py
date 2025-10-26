@@ -5,9 +5,6 @@ app = Flask(__name__)
 app.secret_key = "dev-secret"
 API_URL = "http://127.0.0.1:8001"
 
-# -----------------------------
-# Team Registration
-# -----------------------------
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -45,25 +42,17 @@ def register():
 
     return render_template("register.html")
 
-
-# -----------------------------
-# Problem Selection (single route)
-# -----------------------------
 @app.route("/select", methods=["GET", "POST"])
 def select():
     team_id = session.get("team_id")
     if not team_id:
         flash("Please register first", "danger")
         return redirect(url_for("register"))
-
-    # GET: show problems
     try:
         problems = requests.get(f"{API_URL}/problems").json()
     except Exception as e:
         problems = []
         flash(f"Error loading problems: {e}", "danger")
-
-    # POST: select problem
     if request.method == "POST":
         problem_title = request.form.get("problem_title")
         if not problem_title:
@@ -75,7 +64,6 @@ def select():
             res = requests.post(f"{API_URL}/select_problem", json=payload)
             res.raise_for_status()
             flash(res.json().get("message"), "success")
-            # ✅ Redirect to thanks page after successful selection
             return redirect(url_for("thanks"))
 
         except requests.HTTPError as e:
