@@ -15,4 +15,4 @@ cd hackathon-portal
 ```
 To open the website on your browser
 
-Use : http://127.0.0.1:8080/register
+Use : http://localhost:8080/register
